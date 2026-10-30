@@ -1,0 +1,29 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Environments & Virtual Environments
+.venv/
+venv/
+ENV/
+env/
+.env
+
+# Testing & Coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Editor artifacts
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Temporary scratch and experiment outputs
+*.log
+reports/sample_pdf_extracted.txt
+reports/test_page.pdf

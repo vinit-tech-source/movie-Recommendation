@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+
+{% block title %}OTT Trends &amp; Forecast - CineMetrics{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div class="header-badge">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+      <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+      <polyline points="17 6 23 6 23 12"></polyline>
+    </svg>
+    <span>Temporal Pattern Analysis &amp; ARIMA Projections</span>
+  </div>
+  <h1 class="page-title">OTT Platform Trends &amp; 12-Month Forecast</h1>
+  <p class="page-subtitle">
+    Track monthly additions on Netflix and viewership dynamics on MovieLens with statistical time series modeling. Features Augmented Dickey-Fuller stationarity tests, optimal parameter search, and 12-month forecasts with 95% confidence intervals.
+  </p>
+</div>
+
+<!-- Controls Card -->
+<div class="card" style="margin-bottom: 2rem;">
+  <div class="grid grid-3" style="align-items: flex-end; gap: 1.5rem;">
+    <div class="form-group" style="margin-bottom: 0;">
+      <label class="form-label">Data Source Stream</label>
+      <select id="trend-source" class="form-select">
+        <option value="netflix" selected>Netflix Monthly Titles Added (2016 - 2021)</option>
+        <option value="movielens">MovieLens Monthly Rating Volume (2000 - 2018)</option>
+      </select>
+    </div>
+
+    <div class="form-group" style="margin-bottom: 0;" id="type-filter-group">
+      <label class="form-label">Content Format</label>
+      <select id="trend-type" class="form-select">
+        <option value="" selected>All Formats (Movies &amp; TV Shows)</option>
+        <option value="Movie">Movies Only</option>
+        <option value="TV Show">TV Shows Only</option>
+      </select>
+    </div>
+
+    <div class="form-group" style="margin-bottom: 0;">
+      <label class="form-label">Category Filter</label>
+      <select id="trend-genre" class="form-select">
+        <option value="" selected>All Categories</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<!-- Main Time Series Chart Card -->
+<div class="card" style="margin-bottom: 2.25rem;">
+  <div class="card-title">
+    <div style="display: flex; align-items: center; gap: 0.5rem;">
+      <span id="chart-title">Netflix Monthly Titles Added: Historical Trend &amp; 12-Month Projection</span>
+    </div>
+    <span class="chip chip-primary" id="model-order-badge" style="font-weight: 700;">ARIMA(3, 1, 3)</span>
+  </div>
+
+  <div id="trend-loading" class="loading-box" style="display: none; height: 340px;">
+    <div class="spinner"></div>
+    <p style="font-weight: 600; color: var(--text-body);">Loading temporal series and calculating projection...</p>
+  </div>
+
+  <div style="position: relative; height: 400px;" id="chart-wrapper">
+    <canvas id="trendChart"></canvas>
+  </div>
+
+  <!-- Diagnostic Summary Box -->
+  <div id="trend-diagnostics" style="margin-top: 1.75rem; padding: 1.25rem 1.5rem; background: var(--bg-page); border-radius: var(--radius-md); border: 1px solid var(--border-subtle); font-size: 0.9rem;">
+    <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem;">
+      <div>
+        <span style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--text-muted); display: block; letter-spacing: 0.05em;">Stationarity Assessment</span>
+        <span id="diag-adf" style="font-weight: 800; color: var(--text-main); margin-top: 3px; display: block;">Stationary (d=1, p &lt; 0.0001)</span>
+      </div>
+      <div>
+        <span style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--text-muted); display: block; letter-spacing: 0.05em;">12-Month Out-of-Sample RMSE</span>
+        <div style="display: flex; align-items: baseline; gap: 0.4rem; margin-top: 3px;">
+          <span id="diag-rmse" style="color: var(--accent-emerald); font-weight: 800; font-size: 1.15rem;">--</span>
+          <span id="diag-naive" style="color: var(--text-muted); font-size: 0.82rem;">(vs Naive --)</span>
+        </div>
+      </div>
+      <div>
+        <span style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--text-muted); display: block; letter-spacing: 0.05em;">Model State</span>
+        <span id="diag-msg" style="color: var(--primary); font-weight: 700; margin-top: 3px; display: block;">Active statistical forecast</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Distribution Visualizations Grid -->
+<div class="grid grid-2">
+  <!-- Top Genres Chart -->
+  <div class="card">
+    <div class="card-title">
+      <span>Top 10 Genres by Rating Volume</span>
+      <span class="chip chip-primary">Catalog Volume</span>
+    </div>
+    <div style="position: relative; height: 280px;">
+      <canvas id="topGenresChart"></canvas>
+    </div>
+  </div>
+
+  <!-- Rating Histogram Chart -->
+  <div class="card">
+    <div class="card-title">
+      <span>Rating Distribution Histogram (0.5 Buckets)</span>
+      <span class="chip chip-emerald">Skew Distribution</span>
+    </div>
+    <div style="position: relative; height: 280px;">
+      <canvas id="ratingHistChart"></canvas>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/trends.js') }}"></script>
+{% endblock %}

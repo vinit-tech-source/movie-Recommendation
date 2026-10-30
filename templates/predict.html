@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+
+{% block title %}Predictive Models - CineMetrics{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div class="header-badge">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+      <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+    </svg>
+    <span>Machine Learning Inference Engine</span>
+  </div>
+  <h1 class="page-title">Interactive Predictive Modeling</h1>
+  <p class="page-subtitle">
+    Real-time inference using trained supervised learning pipelines: evaluate film rating potential from structured metadata and classify movie plot summaries into genres.
+  </p>
+</div>
+
+<div class="grid grid-2" style="align-items: start; gap: 2rem;">
+  <!-- Form 1: Rating-Class & Continuous Rating Predictor -->
+  <div class="card">
+    <div class="card-title">
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <span>⭐ Rating &amp; Quality Predictor</span>
+      </div>
+      <span class="chip" style="background: var(--accent-indigo-bg); color: var(--accent-indigo); border-color: var(--accent-indigo-border);">Random Forest + Lasso</span>
+    </div>
+    <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1.5rem; line-height: 1.5;">
+      Select genre combinations and project parameters to estimate whether the movie achieves Low (&lt;3.0), Medium (3.0&ndash;3.99), or High (&ge;4.0) rating status, alongside continuous regression.
+    </p>
+
+    <form id="rating-form">
+      <div class="form-group">
+        <label class="form-label">Active Genre Flags (Select All That Apply)</label>
+        <div class="genre-pills" id="genre-pills-container">
+          <span class="genre-pill selected" data-genre="Action">Action</span>
+          <span class="genre-pill" data-genre="Adventure">Adventure</span>
+          <span class="genre-pill" data-genre="Animation">Animation</span>
+          <span class="genre-pill" data-genre="Children">Children</span>
+          <span class="genre-pill" data-genre="Comedy">Comedy</span>
+          <span class="genre-pill" data-genre="Crime">Crime</span>
+          <span class="genre-pill" data-genre="Documentary">Documentary</span>
+          <span class="genre-pill" data-genre="Drama">Drama</span>
+          <span class="genre-pill" data-genre="Fantasy">Fantasy</span>
+          <span class="genre-pill" data-genre="Film-Noir">Film-Noir</span>
+          <span class="genre-pill" data-genre="Horror">Horror</span>
+          <span class="genre-pill" data-genre="IMAX">IMAX</span>
+          <span class="genre-pill" data-genre="Musical">Musical</span>
+          <span class="genre-pill" data-genre="Mystery">Mystery</span>
+          <span class="genre-pill" data-genre="Romance">Romance</span>
+          <span class="genre-pill selected" data-genre="Sci-Fi">Sci-Fi</span>
+          <span class="genre-pill" data-genre="Thriller">Thriller</span>
+          <span class="genre-pill" data-genre="War">War</span>
+          <span class="genre-pill" data-genre="Western">Western</span>
+        </div>
+      </div>
+
+      <div class="grid grid-3" style="margin-bottom: 1.25rem;">
+        <div class="form-group" style="margin-bottom: 0;">
+          <label class="form-label">Release Year</label>
+          <input type="number" id="pred-year" class="form-control" value="2022" min="1900" max="2030">
+        </div>
+        <div class="form-group" style="margin-bottom: 0;">
+          <label class="form-label">Expected Ratings (n)</label>
+          <input type="number" id="pred-ratings" class="form-control" value="75" min="1" max="5000">
+        </div>
+        <div class="form-group" style="margin-bottom: 0;">
+          <label class="form-label">Tag Volume</label>
+          <input type="number" id="pred-tags" class="form-control" value="4" min="0" max="200">
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary" style="width: 100%;">
+        Run Rating Prediction &rarr;
+      </button>
+    </form>
+
+    <!-- Prediction Output -->
+    <div id="rating-output" style="margin-top: 1.75rem; display: none;">
+      <div style="padding: 1.5rem; background: var(--bg-page); border-radius: var(--radius-md); border: 1.5px solid var(--primary-border);">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; flex-wrap: wrap; gap: 1rem;">
+          <div>
+            <span style="font-size: 0.78rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em;">Class Prediction (Random Forest)</span>
+            <div id="output-class-badge" style="font-size: 1.2rem; font-weight: 800; margin-top: 0.35rem; display: inline-block;"></div>
+          </div>
+          <div style="text-align: right;">
+            <span style="font-size: 0.78rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em;">Lasso Regression Score</span>
+            <div id="output-rating-value" style="font-size: 1.6rem; font-weight: 800; color: var(--primary); margin-top: 0.2rem;"></div>
+          </div>
+        </div>
+
+        <span style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted); display: block; margin-bottom: 0.6rem; text-transform: uppercase; letter-spacing: 0.05em;">Class Probabilities</span>
+        <div id="output-probabilities"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Form 2: Genre Classification from Plot Description -->
+  <div class="card">
+    <div class="card-title">
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <span>📖 Plot Genre Classifier</span>
+      </div>
+      <span class="chip chip-emerald">Multinomial Naive Bayes</span>
+    </div>
+    <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1.5rem; line-height: 1.5;">
+      Enter an OTT storyline synopsis. The text mining pipeline (TF-IDF 1-2 grams + Porter stemming) will classify it into the top probable categories.
+    </p>
+
+    <form id="genre-form">
+      <div class="form-group">
+        <label class="form-label">Storyline Synopsis / Description</label>
+        <textarea id="genre-text" rows="5" class="form-control" style="line-height: 1.5;" placeholder="Enter plot summary...">A relentless undercover detective infiltrates a powerful criminal syndicate to avenge his partner, only to uncover high-level corruption inside the police department.</textarea>
+      </div>
+
+      <div style="display: flex; gap: 0.5rem; margin-bottom: 1.25rem; flex-wrap: wrap;">
+        <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-muted); align-self: center; margin-right: 0.25rem;">Samples:</span>
+        <button type="button" class="btn btn-secondary btn-sm" onclick="setSample('scifi')">Sci-Fi</button>
+        <button type="button" class="btn btn-secondary btn-sm" onclick="setSample('comedy')">Comedy</button>
+        <button type="button" class="btn btn-secondary btn-sm" onclick="setSample('doc')">Documentary</button>
+      </div>
+
+      <button type="submit" class="btn btn-primary" style="width: 100%;">
+        Classify Genres &rarr;
+      </button>
+    </form>
+
+    <!-- Genre Output -->
+    <div id="genre-output" style="margin-top: 1.75rem; display: none;">
+      <div style="padding: 1.5rem; background: var(--bg-page); border-radius: var(--radius-md); border: 1.5px solid var(--accent-emerald-border);">
+        <span style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 1rem;">
+          Posterior Genre Probabilities (Top Classes)
+        </span>
+        <div id="genre-predictions-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/predict.js') }}"></script>
+{% endblock %}

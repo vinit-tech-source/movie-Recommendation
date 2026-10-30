@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}CineMetrics - Cinema &amp; OTT Intelligence{% endblock %}</title>
+  
+  <!-- Modern Font: Plus Jakarta Sans & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  {% block head %}{% endblock %}
+</head>
+<body>
+  <!-- Ambient Glow Background -->
+  <div class="ambient-glow"></div>
+
+  <!-- Navigation Header -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="/" class="nav-brand">
+        <div class="brand-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+          </svg>
+        </div>
+        <span class="brand-text">Cine<span>Metrics</span></span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="/" id="nav-home">Explore</a></li>
+        <li><a href="/recommend" id="nav-recommend">Recommendations</a></li>
+        <li><a href="/predict" id="nav-predict">Predictor</a></li>
+        <li><a href="/trends" id="nav-trends">Trends &amp; Forecast</a></li>
+        <li><a href="/performance" id="nav-performance">Model Benchmarks</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <div class="status-indicator">
+          <span class="status-dot"></span>
+          <span>Engine Online</span>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content Container -->
+  <main class="container">
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-left">
+        <div class="footer-brand">Cine<span>Metrics</span></div>
+        <p>AI-Powered Cinema Intelligence &amp; OTT Predictive Analytics Platform</p>
+      </div>
+      <div class="footer-right">
+        <span>Fact Constellation Warehouse &bull; Scikit-Learn &bull; ARIMA &bull; Apriori &bull; Flask</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

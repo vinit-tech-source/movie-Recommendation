@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mini Project Report - Movie / OTT Recommendation &amp; Trend Analysis</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 14mm 18mm 18mm 18mm;
+      @bottom-left {
+        content: "Data Mining and Analytics | CS3203T-A";
+        font-size: 8pt;
+        color: #555;
+      }
+      @bottom-right {
+        content: "Page " counter(page);
+        font-size: 8pt;
+        color: #555;
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-size: 8.5pt;
+      line-height: 1.35;
+      color: #1f2937;
+      margin: 0;
+      padding: 0;
+      background: #f1f5f9;
+    }
+
+    .page {
+      background: #fff;
+      width: 210mm;
+      min-height: 297mm;
+      margin: 0 auto 10mm auto;
+      padding: 14mm 18mm 18mm 18mm;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      page-break-after: always;
+      page-break-inside: avoid;
+    }
+
+    .page:last-child {
+      page-break-after: avoid;
+      margin-bottom: 0;
+    }
+
+    /* Running Header & Footer for Screen Display */
+    .screen-header {
+      font-size: 8pt;
+      color: #555;
+      border-bottom: 0.75pt solid #b7c9d6;
+      padding-bottom: 4px;
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      font-weight: 500;
+    }
+    .screen-footer {
+      font-size: 8pt;
+      color: #555;
+      border-top: 0.75pt solid #b7c9d6;
+      padding-top: 5px;
+      margin-top: 10px;
+      display: flex;
+      justify-content: space-between;
+      font-weight: 500;
+    }
+
+    .content-area {
+      flex: 1;
+    }
+
+    /* Cover Page */
+    .cover-page {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .college-header {
+      margin-top: 15mm;
+    }
+    .college-name {
+      font-size: 13pt;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: #111827;
+      text-transform: uppercase;
+    }
+    .college-loc {
+      font-size: 9.5pt;
+      color: #4b5563;
+      margin-top: 3px;
+    }
+    .report-title-block {
+      margin: 20mm 0;
+    }
+    .report-type {
+      font-size: 18pt;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #17365d;
+      margin-bottom: 10px;
+    }
+    .project-title {
+      font-size: 15pt;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: #17365d;
+      line-height: 1.3;
+      margin-bottom: 8px;
+    }
+    .project-subtitle {
+      font-size: 9.5pt;
+      color: #374151;
+      line-height: 1.4;
+      max-width: 90%;
+      margin: 0 auto;
+    }
+    .meta-table-wrap {
+      margin: 0 auto 15mm auto;
+      display: inline-block;
+      text-align: left;
+    }
+    .meta-table {
+      border-collapse: collapse;
+      margin: 0;
+    }
+    .meta-table td {
+      border: none;
+      padding: 3px 8px;
+      font-size: 9.5pt;
+      vertical-align: top;
+      background: none !important;
+    }
+    .meta-table td.label {
+      font-weight: 700;
+      color: #17365d;
+      width: 120px;
+    }
+    .disclaimer {
+      font-size: 8pt;
+      color: #6b7280;
+      margin-bottom: 4px;
+    }
+
+    /* Headings */
+    h1 {
+      font-size: 11pt;
+      font-weight: 700;
+      color: #17365d;
+      margin-top: 8px;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+    h2 {
+      font-size: 9.5pt;
+      font-weight: 700;
+      color: #17365d;
+      margin-top: 6px;
+      margin-bottom: 3px;
+    }
+
+    p {
+      margin-top: 0;
+      margin-bottom: 5px;
+      text-align: justify;
+    }
+
+    ul, ol {
+      margin-top: 2px;
+      margin-bottom: 5px;
+      padding-left: 18px;
+    }
+    li {
+      margin-bottom: 3px;
+      text-align: justify;
+    }
+
+    /* Tables */
+    table.report-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 4px 0 7px 0;
+      font-size: 7.8pt;
+      line-height: 1.25;
+    }
+    table.report-table th, table.report-table td {
+      border: 0.5pt solid #cbd5e1;
+      padding: 3px 6px;
+      text-align: left;
+      vertical-align: top;
+    }
+    table.report-table th {
+      background-color: #d9eaf7;
+      color: #17365d;
+      font-weight: 700;
+      font-size: 8pt;
+    }
+    table.report-table tr:nth-child(even) td {
+      background-color: #f8fafc;
+    }
+
+    @media print {
+      body {
+        background: none;
+      }
+      .page {
+        margin: 0;
+        box-shadow: none;
+        width: 100%;
+        min-height: 100%;
+        padding: 0;
+      }
+      .screen-header, .screen-footer {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ================= PAGE 1: COVER PAGE ================= -->
+  <div class="page cover-page">
+    <div class="screen-header">
+      <span>Data Mining and Analytics | CS3203T-A</span>
+      <span>Page 1</span>
+    </div>
+
+    <div class="content-area" style="display: flex; flex-direction: column; justify-content: space-between;">
+      <div class="college-header">
+        <div class="college-name">Rajarshi Shahu College of Engineering</div>
+        <div class="college-loc">Tathawade, Pune &ndash; 411033</div>
+        <div class="college-loc">Department of Computer Engineering</div>
+      </div>
+
+      <div class="report-title-block">
+        <div class="report-type">Mini Project Report</div>
+        <div class="project-title">Movie / OTT Recommendation and Trend Analysis</div>
+        <div class="project-subtitle">
+          An Integrated Analytical System Using Fact Constellation Warehousing, Apriori Association Rules, Multi-Modal Classification, Regularized Regression, and ARIMA Time Series
+        </div>
+      </div>
+
+      <div class="meta-table-wrap">
+        <table class="meta-table">
+          <tr>
+            <td class="label">Subject:</td>
+            <td>Data Mining and Analytics</td>
+          </tr>
+          <tr>
+            <td class="label">Subject Code:</td>
+            <td>CS3203T-A</td>
+          </tr>
+          <tr>
+            <td class="label">Academic Year:</td>
+            <td>2026&ndash;2027</td>
+          </tr>
+          <tr>
+            <td class="label">Semester:</td>
+            <td>1</td>
+          </tr>
+          <tr><td colspan="2" style="height: 8px;"></td></tr>
+          <tr>
+            <td class="label">Submitted by:</td>
+            <td style="font-size: 12pt; font-weight: 800; color: #0f172a;">Vinit Shinde</td>
+          </tr>
+          <tr>
+            <td class="label">Roll No:</td>
+            <td><strong>37</strong></td>
+          </tr>
+          <tr>
+            <td class="label">PRN:</td>
+            <td><strong>RBT24CS178</strong></td>
+          </tr>
+          <tr>
+            <td class="label">Branch:</td>
+            <td>B.Tech &ndash; Computer Engineering</td>
+          </tr>
+          <tr><td colspan="2" style="height: 8px;"></td></tr>
+          <tr>
+            <td class="label">Faculty Guide:</td>
+            <td><strong>Prof. Jit Shendekar</strong></td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="disclaimer">
+        Autonomous Institute Affiliated to Savitribai Phule Pune University &bull; Academic Year 2026&ndash;27
+      </div>
+    </div>
+
+    <div class="screen-footer">
+      <span>Data Mining and Analytics | CS3203T-A</span>
+      <span>Page 1</span>
+    </div>
+  </div>
+
+
+  <!-- ================= PAGE 2: CONTENTS, 1. ABSTRACT, 2. INTRODUCTION, 3. PROBLEM STATEMENT ================= -->
+  <div class="page">
+    <div class="screen-header">
+      <span>Data Mining and Analytics | CS3203T-A</span>
+      <span>Page 2</span>
+    </div>
+
+    <div class="content-area">
+      <h1>Contents</h1>
+      <table class="report-table">
+        <thead>
+          <tr>
+            <th style="width: 8%;">Sec</th>
+            <th style="width: 42%;">Title</th>
+            <th style="width: 8%;">Sec</th>
+            <th style="width: 42%;">Title</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>1</strong></td><td>Abstract</td>
+            <td><strong>8</strong></td><td>Methodology and Algorithm</td>
+          </tr>
+          <tr>
+            <td><strong>2</strong></td><td>Introduction</td>
+            <td><strong>9</strong></td><td>System Architecture</td>
+          </tr>
+          <tr>
+            <td><strong>3</strong></td><td>Problem Statement</td>
+            <td><strong>10</strong></td><td>Software and Tools</td>
+          </tr>
+          <tr>
+            <td><strong>4</strong></td><td>Aim and Objectives</td>
+            <td><strong>11</strong></td><td>Experimental Output and Evaluation</td>
+          </tr>
+          <tr>
+            <td><strong>5</strong></td><td>Scope of the Project</td>
+            <td><strong>12</strong></td><td>Limitations and Future Scope</td>
+          </tr>
+          <tr>
+            <td><strong>6</strong></td><td>Syllabus Mapping</td>
+            <td><strong>13</strong></td><td>Conclusion</td>
+          </tr>
+          <tr>
+            <td><strong>7</strong></td><td>Dataset Description</td>
+            <td><strong>14</strong></td><td>References</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h1>1. Abstract</h1>
+      <p>
+        With the rapid expansion of digital streaming media platforms, entertainment distributors face fundamental challenges in catalog discovery, customer churn reduction, and acquisition planning. This mini-project presents an end-to-end analytical data mining architecture that unifies theatrical viewer preferences from the <strong>MovieLens 100k</strong> dataset (100,836 ratings across 9,742 movies) with commercial video-on-demand distribution patterns from the <strong>Netflix Titles</strong> catalog (8,807 streaming records). The system executes an automated, idempotent ETL pipeline loading raw records into a conformed <strong>Fact Constellation Data Warehouse</strong> in SQLite across 5,340 conformed dates with complete relational foreign key integrity.
+      </p>
+      <p>
+        Upon this multidimensional warehouse, five complementary data mining modules are executed: (1) Apriori market-basket mining discovering 935 high-lift co-viewing association rules (Lift up to 6.15x); (2) Multinomial Naive Bayes natural language processing classifying plot summaries into genres with 50.49% accuracy; (3) Balanced Random Forest predicting movie rating tiers with 63.01% accuracy without data leakage; (4) Regularized Lasso regression performing sparse feature selection (Test RMSE: 0.4683); and (5) Box-Jenkins ARIMA(3,1,3) time series modeling achieving a 22.47% forecast improvement over naive persistence. Finally, a weighted hybrid recommender engine evaluated offline via Leave-One-Out Hit-Rate@10 (0.0467) and served through an interactive Flask web application provides practical, explainable deployment.
+      </p>
+
+      <h1>2. Introduction</h1>
+      <p>
+        Modern media distribution relies extensively on data mining algorithms to extract actionable intelligence from vast, heterogeneous consumer interaction logs. Online streaming services generate continuous transaction feeds, descriptive metadata, and temporal catalog releases. Examining these multidimensional datasets manually is infeasible due to extreme sparsity and combinatorial complexity. Data mining bridges this analytical gap by uncovering latent associations between titles, classifying unstructured narrative synopses, projecting temporal catalog growth, and personalizing viewing queues.
+      </p>
+      <p>
+        By integrating traditional market-basket analysis (Apriori) with statistical time series forecasting (ARIMA), text mining (TF-IDF vectorization), and supervised ensemble learning (Random Forest), content providers can reliably predict audience reception, optimize procurement budgets, and deliver transparent, explainable recommendations to subscribers without black-box opacity.
+      </p>
+
+      <h1>3. Problem Statement</h1>
+      <p>
+        To ingest, cleanse, and structure heterogeneous movie rating logs and streaming catalog metadata into an analytical Fact Constellation warehouse, and to apply association rule mining, text classification, predictive regression, and ARIMA temporal modeling so that co-viewing affinities, rating tiers, and platform catalog trends can be reliably discovered, evaluated, and served through an explainable recommendation interface.
+      </p>
+    </div>
+
+    <div class="screen-footer">
+      <span>Data Mining and Analytics | CS3203T-A</span>
+      <span>Page 2</span>
+    </div>
+  </div>
+
+
+  <!-- ================= PAGE 3: 4. OBJECTIVES, 5. SCOPE, 6. SYLLABUS, 7. DATASET ================= -->
+  <div class="page">
+    <div class="screen-header">
+      <span>Data Mining and Analytics | CS3203T-A</span>
+      <span>Page 3</span>
+    </div>
+
+    <div class="content-area">
+      <h1>4. Aim and Objectives</h1>
+      <p><strong>Aim:</strong> To design, develop, and empirically evaluate an integrated Movie and OTT Recommendation and Trend Analysis system using multidimensional warehousing and core data mining algorithms.</p>
+      <ul>
+        <li>Construct an idempotent ETL pipeline to assemble a SQLite Fact Constellation schema with conformed date dimensions and 0 orphan keys.</li>
+        <li>Formulate user viewing records into transactional baskets and apply Apriori to mine frequent itemsets and co-viewing rules.</li>
+        <li>Develop a text mining pipeline using NLTK Porter Stemming, TF-IDF vectorization, and Multinomial Naive Bayes to classify plot synopses.</li>
+        <li>Engineer leak-free metadata features and train Decision Tree and Random Forest classifiers to predict movie rating categories.</li>
+        <li>Train and benchmark Linear, Ridge, and Lasso regression models to estimate continuous movie ratings and analyze active L1 feature weights.</li>
+        <li>Conduct ADF stationarity tests and fit ARIMA models on monthly additions to forecast catalog expansion with 95% confidence intervals.</li>
+        <li>Synthesize Content-based, Item-Item Collaborative Filtering, and Apriori rules into an explainable Hybrid Recommender (evaluated via Hit-Rate@10).</li>
+        <li>Deploy an interactive Flask web application and Chart.js analytical dashboard for real-time inference.</li>
+      </ul>
+
+      <h1>5. Scope of the Project</h1>
+      <p>
+        The project encompasses end-to-end data processing, from raw CSV cleansing to analytical warehousing, model training, offline mathematical evaluation, and interactive dashboard deployment. All reported metrics reflect empirical test evaluations on fixed splits without data leakage. The project operates on benchmark historical catalogs (MovieLens 100k and Netflix Titles); it does not establish causal human behavior nor perform automated live video transcoding.
+      </p>
+
+      <h1>6. Syllabus Mapping</h1>
+      <table class="report-table">
+        <thead>
+          <tr>
+            <th style="width: 28%;">Syllabus Unit / Topic</th>
+            <th>Implementation in this Project</th>
+            <th style="width: 12%;">Outcome</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Unit 1: Warehousing &amp; Preprocessing</strong></td>
+            <td>Fact Constellation schema in SQLite (warehouse.db), conformed dim_date, OLAP queries.</td>
+            <td><strong>CO1</strong></td>
+          </tr>
+          <tr>
+            <td><strong>Unit 2: Transformation &amp; Reduction</strong></td>
+            <td>Regex release year extraction, genre one-hot encoding, log transform, Porter Stemming, TF-IDF.</td>
+            <td><strong>CO1, CO2</strong></td>
+          </tr>
+          <tr>
+            <td><strong>Unit 3: Regression Analysis</strong></td>
+            <td>OLS, Ridge (L2 shrinkage), Lasso (L1 feature selection), Decision Tree Regressor for continuous ratings.</td>
+            <td><strong>CO3, CO4</strong></td>
+          </tr>
+          <tr>
+            <td><strong>Unit 4: Association Rules &amp; Classification</strong></td>
+            <td>Apriori algorithm (support/confidence/lift), Multinomial Naive Bayes, Decision Trees, Random Forest.</td>
+            <td><strong>CO2, CO4</strong></td>
+          </tr>
+          <tr>
+            <td><strong>Unit 5: Advanced Mining &amp; Recommenders</strong></td>
+            <td>ADF stationarity differencing (d=1), ARIMA(3,1,3) forecasting, Content-based TF-IDF, Item-CF, Hit-Rate@10.</td>
+            <td><strong>CO5</strong></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h1>7. Dataset Description</h1>
+      <table class="report-table">
+        <thead>
+          <tr>
+            <th style="width: 20%;">Dataset File</th>
+            <th style="width: 22%;">Records / Shape</th>
+            <th style="width: 26%;">Raw Attributes</th>
+            <th>Transformation &amp; Cleansing</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>ratings.csv</code></td>
+            <td>100,836 rows (610 users)</td>
+            <td>userId, movieId, rating, timestamp</td>
+            <td>Converted epoch to UTC ISO date; mapped rating tiers: Low (&lt;3), Med (3&ndash;3.9), High (&ge;4). 0 orphan keys.</td>
+          </tr>
+          <tr>
+            <td><code>movies.csv</code></td>
+            <td>9,742 movies</td>
+            <td>movieId, title, genres</td>
+            <td>Extracted 4-digit year via regex; split pipe genres into conformed dim_genre; cleaned titles.</td>
+          </tr>
+          <tr>
+            <td><code>tags.csv &amp; links.csv</code></td>
+            <td>3,683 tags / 9,742 links</td>
+            <td>userId, movieId, tag, imdbId</td>
+            <td>Cleaned text, lowercased, merged for content-based TF-IDF document profiles.</td>
+          </tr>
+          <tr>
+            <td><code>netflix_titles.csv</code></td>
+            <td>8,807 titles</td>
+            <td>show_id, type, director, cast, country, date_added, duration, description</td>
+            <td>Stripped whitespace, parsed date_added into conformed dates, parsed duration, split multi-genres into bridge table.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="screen-footer">
+      <span>Data Mining and Analytics | CS3203T-A</span>
+      <span>Page 3</span>
+    </div>
+  </div>
+
+
+  <!-- ================= PAGE 4: 8. METHODOLOGY, 9. ARCHITECTURE, 10. SOFTWARE & TOOLS ================= -->
+  <div class="page">
+    <div class="screen-header">
+      <span>Data Mining and Analytics | CS3203T-A</span>
+      <span>Page 4</span>
+    </div>
+
+    <div class="content-area">
+      <h1>8. Methodology and Algorithm</h1>
+      <p style="margin-bottom: 3px;">The system follows a sequential 8-stage data mining lifecycle:</p>
+      <ul>
+        <li><strong>Step 1 &ndash; Ingestion &amp; Discovery:</strong> Robust automated path discovery scanning nested directories, reading raw CSVs into DataFrames.</li>
+        <li><strong>Step 2 &ndash; Fact Constellation ETL:</strong> Automated idempotent relational pipeline loading 11 normalized tables into SQLite with primary/foreign keys.</li>
+        <li><strong>Step 3 &ndash; Basket Assembly &amp; Apriori Mining:</strong> Formulated 599 users &times; 300 movies binary co-viewing matrix. Extracted frequent itemsets and association rules using mlxtend.</li>
+        <li><strong>Step 4 &ndash; Text Mining &amp; Naive Bayes:</strong> Plot synopsis cleaning, Porter stemming, TF-IDF vectorization (20,000 max features), and MultinomialNB tuning.</li>
+        <li><strong>Step 5 &ndash; Rating Tier Classification:</strong> Engineered 22 leak-free features (19 genre flags, release year, log ratings, tag counts) and trained Random Forest.</li>
+        <li><strong>Step 6 &ndash; Regularized Regression:</strong> Evaluated Linear, Ridge, and Lasso regression models with cross-validation to analyze L1 coefficient sparsity.</li>
+        <li><strong>Step 7 &ndash; Time Series Differencing &amp; ARIMA:</strong> Stationarity verification via ADF unit-root test (d=1), grid search over (p,1,q), and 12-month holdout evaluation.</li>
+        <li><strong>Step 8 &ndash; Hybrid Recommender &amp; Serving:</strong> Linear ensemble of Content-based, Item-CF, and Apriori rules served through a responsive Flask web app.</li>
+      </ul>
+
+      <h2>Key Measures and Mathematical Formulations</h2>
+      <table class="report-table">
+        <thead>
+          <tr>
+            <th style="width: 22%;">Measure / Algorithm</th>
+            <th style="width: 40%;">Mathematical Formula / Objective Function</th>
+            <th>Interpretation in Project Context</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Support</strong></td>
+            <td><code>support(A &rarr; B) = P(A &cup; B) = Count(A &cup; B) / N</code></td>
+            <td>Fraction of user viewing baskets containing both titles.</td>
+          </tr>
+          <tr>
+            <td><strong>Confidence</strong></td>
+            <td><code>confidence(A &rarr; B) = P(A &cup; B) / P(A)</code></td>
+            <td>Conditional probability that a user likes title B given they liked A.</td>
+          </tr>
+          <tr>
+            <td><strong>Lift</strong></td>
+            <td><code>lift(A &rarr; B) = confidence(A &rarr; B) / support(B)</code></td>
+            <td>Affinity strength: Lift &gt; 1 indicates positive association above independence.</td>
+          </tr>
+          <tr>
+            <td><strong>Naive Bayes</strong></td>
+            <td><code>P(c | d) &prop; P(c) &prod; P(w_i | c)</code></td>
+            <td>Posterior genre probability given word tokens in plot synopsis.</td>
+          </tr>
+          <tr>
+            <td><strong>Lasso (L1)</strong></td>
+            <td><code>min (1/2n)||y - X&beta;||&sup2; + &lambda;&Sigma;|&beta;_j|</code></td>
+            <td>L1-penalized regression driving uninformative genre weights to exactly 0.</td>
+          </tr>
+          <tr>
+            <td><strong>ARIMA(p,d,q)</strong></td>
+            <td><code>&phi;(B)(1-B)&supd; y_t = &theta;(B)&epsilon;_t</code></td>
+            <td>Autoregressive integrated moving average for monthly OTT additions.</td>
+          </tr>
+          <tr>
+            <td><strong>Hybrid Score</strong></td>
+            <td><code>S_h = 0.40 S_content + 0.30 S_cf + 0.30 S_rule</code></td>
+            <td>Dynamic linear combination with weight normalization for missing signals.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h1>9. System Architecture</h1>
+      <table class="report-table">
+        <thead>
+          <tr>
+            <th style="width: 24%;">Pipeline Stage</th>
+            <th>Component &amp; Implementation Mechanism</th>
+            <th style="width: 24%;">Generated Artifact</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>1. Warehouse ETL</strong></td>
+            <td>SQLite Fact Constellation schema with 11 relational tables &amp; 11 indexes</td>
+            <td><code>warehouse.db</code></td>
+          </tr>
+          <tr>
+            <td><strong>2. Association Engine</strong></td>
+            <td>mlxtend Apriori frequent itemsets on 599&times;300 co-viewing matrix</td>
+            <td><code>models/rules.joblib</code></td>
+          </tr>
+          <tr>
+            <td><strong>3. Classification</strong></td>
+            <td>MultinomialNB (genre text) &amp; Balanced Random Forest (rating tier)</td>
+            <td><code>models/*_classifier.joblib</code></td>
+          </tr>
+          <tr>
+            <td><strong>4. Trend &amp; Regression</strong></td>
+            <td>LassoCV rating predictor &amp; statsmodels ARIMA(3,1,3) monthly additions</td>
+            <td><code>models/arima_models.joblib</code></td>
+          </tr>
+          <tr>
+            <td><strong>5. Serving Engine</strong></td>
+            <td>Hybrid Recommender + Flask REST API + Jinja2 + Chart.js dashboard</td>
+            <td><code>app.py / web interface</code></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h1>10. Software and Tools</h1>
+      <p>
+        <strong>Core Language:</strong> Python 3.12 &bull; 
+        <strong>Data Handling:</strong> Pandas 2.3.3, NumPy 2.5.2 &bull; 
+        <strong>Database:</strong> SQLite 3 (ACID-compliant Fact Constellation) &bull; 
+        <strong>Machine Learning:</strong> Scikit-Learn 1.6.1 &bull; 
+        <strong>Pattern Mining:</strong> mlxtend 0.25.0 &bull; 
+        <strong>Time Series:</strong> statsmodels 0.15.0 &bull; 
+        <strong>NLP:</strong> NLTK 3.10.4 &bull; 
+        <strong>Web &amp; UI:</strong> Flask 3.1.3, Jinja2, Chart.js &bull; 
+        <strong>Testing:</strong> Pytest 9.1.1 (19/19 passing), Playwright 1.64.0.
+      </p>
+    </div>
+
+    <div class="screen-footer">
+      <span>Data Mining and Analytics | CS3203T-A</span>
+      <span>Page 4</span>
+    </div>
+  </div>
+
+
+  <!-- ================= PAGE 5: 11. EVALUATION, 12. LIMITATIONS, 13. CONCLUSION, 14. REFERENCES ================= -->
+  <div class="page">
+    <div class="screen-header">
+      <span>Data Mining and Analytics | CS3203T-A</span>
+      <span>Page 5</span>
+    </div>
+
+    <div class="content-area">
+      <h1>11. Experimental Output and Evaluation</h1>
+      <p style="margin-bottom: 3px;">
+        All metrics reported below were produced by the automated training pipeline (<code>python train_all.py</code>) on reproducible holdout splits:
+      </p>
+      
+      <table class="report-table">
+        <thead>
+          <tr>
+            <th style="width: 22%;">Module</th>
+            <th style="width: 26%;">Algorithm</th>
+            <th style="width: 20%;">Primary Metric</th>
+            <th style="width: 17%;">Secondary Metric</th>
+            <th>Optimal Parameter</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Genre Text Mining</strong></td>
+            <td>Multinomial Naive Bayes</td>
+            <td><strong>Accuracy: 50.49%</strong></td>
+            <td>Macro F1: 0.4757</td>
+            <td>&alpha; = 0.1</td>
+          </tr>
+          <tr>
+            <td><strong>Genre Baseline</strong></td>
+            <td>Logistic Regression</td>
+            <td>Accuracy: 51.54%</td>
+            <td>Macro F1: 0.5215</td>
+            <td>C = 1.0</td>
+          </tr>
+          <tr>
+            <td><strong>Rating Tier Class</strong></td>
+            <td>Decision Tree</td>
+            <td>Accuracy: 50.68%</td>
+            <td>Macro F1: 0.4766</td>
+            <td>max_depth = 10</td>
+          </tr>
+          <tr>
+            <td><strong>Rating Tier Class</strong></td>
+            <td><strong>Random Forest</strong></td>
+            <td><strong>Accuracy: 63.01%</strong></td>
+            <td>Macro F1: 0.5576</td>
+            <td>n_est=200, depth=10</td>
+          </tr>
+          <tr>
+            <td><strong>Rating Regression</strong></td>
+            <td><strong>Lasso (L1)</strong></td>
+            <td><strong>Test RMSE: 0.4683</strong></td>
+            <td>Test R&sup2;: 0.3105</td>
+            <td>&alpha; = 0.00041</td>
+          </tr>
+          <tr>
+            <td><strong>Rating Regression</strong></td>
+            <td>Ridge (L2)</td>
+            <td>Test RMSE: 0.4684</td>
+            <td>Test R&sup2;: 0.3103</td>
+            <td>&alpha; = 10.0</td>
+          </tr>
+          <tr>
+            <td><strong>Time Series ARIMA</strong></td>
+            <td>ARIMA(3,1,3) on Netflix</td>
+            <td><strong>Test RMSE: 41.42</strong></td>
+            <td>Naive RMSE: 53.42</td>
+            <td><strong>+22.47% vs. Naive</strong></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table class="report-table">
+        <thead>
+          <tr>
+            <th style="width: 25%;">Recommendation Method</th>
+            <th style="width: 14%;">Hit-Rate @ 10</th>
+            <th style="width: 14%;">Precision @ 10</th>
+            <th style="width: 14%;">Recall @ 10</th>
+            <th>Top Discovered Apriori Rule</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Content-Based (TF-IDF)</td>
+            <td>0.0067</td>
+            <td>0.0007</td>
+            <td>0.0067</td>
+            <td><strong>Kill Bill: Vol. 1 &rarr; Kill Bill: Vol. 2</strong></td>
+          </tr>
+          <tr>
+            <td>Apriori Association Rules</td>
+            <td>0.0267</td>
+            <td>0.0027</td>
+            <td>0.0267</td>
+            <td>Support: 10.85% &bull; Confidence: 73.86%</td>
+          </tr>
+          <tr>
+            <td>Item-Item Collaborative</td>
+            <td><strong>0.0467</strong></td>
+            <td>0.0047</td>
+            <td>0.0467</td>
+            <td><strong>Lift: 6.15x (Strongest Rule)</strong></td>
+          </tr>
+          <tr>
+            <td><strong>Hybrid Ensemble Engine</strong></td>
+            <td><strong>0.0467</strong></td>
+            <td><strong>0.0047</strong></td>
+            <td><strong>0.0467</strong></td>
+            <td>The Godfather &amp; Goodfellas &rarr; Part II (Lift: 4.43x)</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h1>12. Limitations and Future Scope</h1>
+      <p>
+        <strong>Limitations:</strong> (1) The MovieLens 100k catalog spans 1996&ndash;2018 theatrical releases whereas Netflix additions span 2008&ndash;2021, reflecting divergent distribution channels. (2) Netflix synopses are concise (~25 words), constraining lexical separation for subtle genres. (3) Natural user rating skew required class-balanced loss weighting during classification.
+      </p>
+      <p>
+        <strong>Future Scope:</strong> (1) Transition from cosine similarity to Matrix Factorization (SVD) and Neural Collaborative Filtering (NCF). (2) Ingest streaming clickstream telemetry (completion rate, pause points) via Kafka. (3) Containerized Kubernetes microservices deployment with continuous retraining.
+      </p>
+
+      <h1>13. Conclusion</h1>
+      <p>
+        This mini-project successfully engineered an integrated Data Mining and Analytics architecture fulfilling all course outcomes (CO1&ndash;CO5). An automated ETL pipeline structured 100,836 ratings and 8,807 streaming titles into an analytical SQLite Fact Constellation warehouse. Association mining mined 935 high-lift co-viewing rules, text mining classified plot synopses, Random Forest predicted rating tiers with 63.01% accuracy, Lasso regression isolated critical genre features, and ARIMA(3,1,3) forecasted monthly platform additions with a 22.47% error reduction over baseline persistence. The hybrid recommender and responsive Flask dashboard demonstrate how multidimensional warehousing and core data mining algorithms unite into a practical production system.
+      </p>
+
+      <h1>14. References</h1>
+      <ol style="margin-top: 2px; margin-bottom: 4px;">
+        <li>Agrawal, R., Imieli&nacute;ski, T., &amp; Swami, A. (1993). <em>Mining Association Rules between Sets of Items in Large Databases</em>. ACM SIGMOD.</li>
+        <li>Box, G. E., Jenkins, G. M., Reinsel, G. C., &amp; Ljung, G. M. (2015). <em>Time Series Analysis: Forecasting and Control</em> (5th ed.). Wiley.</li>
+        <li>Breiman, L. (2001). <em>Random Forests</em>. Machine Learning, 45(1), 5&ndash;32.</li>
+        <li>Harper, F. M., &amp; Konstan, J. A. (2015). <em>The MovieLens Datasets: History and Context</em>. ACM TiiS, 5(4), 1&ndash;19.</li>
+        <li>Tibshirani, R. (1996). <em>Regression Shrinkage and Selection via the Lasso</em>. J. R. Statist. Soc. B, 58(1), 267&ndash;288.</li>
+        <li>Savitribai Phule Pune University &bull; CS3203T-A Data Mining and Analytics Course Curriculum.</li>
+      </ol>
+
+      <p style="font-size: 7.5pt; color: #6b7280; font-style: italic; text-align: center; margin-top: 4px; margin-bottom: 0;">
+        Submission Verification: Submitted by Vinit Shinde (Roll No: 37, PRN: RBT24CS178). All metrics verified via train_all.py test runs.
+      </p>
+    </div>
+
+    <div class="screen-footer">
+      <span>Data Mining and Analytics | CS3203T-A</span>
+      <span>Page 5</span>
+    </div>
+  </div>
+
+</body>
+</html>

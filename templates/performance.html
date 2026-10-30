@@ -1,0 +1,283 @@
+{% extends "base.html" %}
+
+{% block title %}Model Benchmarks &amp; Performance - CineMetrics{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div class="header-badge">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+      <polyline points="14 2 14 8 20 8"></polyline>
+      <line x1="16" y1="13" x2="8" y2="13"></line>
+      <line x1="16" y1="17" x2="8" y2="17"></line>
+      <polyline points="10 9 9 9 8 9"></polyline>
+    </svg>
+    <span>Empirical Model Evaluation &amp; Governance</span>
+  </div>
+  <h1 class="page-title">Model Performance &amp; Evaluation Metrics</h1>
+  <p class="page-subtitle">
+    Empirical benchmark metrics derived directly from executed testing pipelines. Includes classification matrices, regression error metrics, time-series holdouts, recommender Hit-Rate@10, and syllabus Course Outcome (CO1&ndash;CO5) verification.
+  </p>
+</div>
+
+<!-- Executive Summary Metric Cards -->
+<div class="grid grid-4" style="margin-bottom: 2.5rem;">
+  <div class="stat-card" style="border-top-color: var(--accent-emerald);">
+    <span class="stat-label">Rating Classification</span>
+    <span class="stat-value" style="color: var(--accent-emerald);">63.01%</span>
+    <span class="stat-subtext">Random Forest accuracy (Macro F1: 0.5576)</span>
+  </div>
+  <div class="stat-card" style="border-top-color: var(--primary);">
+    <span class="stat-label">Rating Regression</span>
+    <span class="stat-value" style="color: var(--primary);">0.4683</span>
+    <span class="stat-subtext">Lasso Test RMSE (Test R²: 0.3105)</span>
+  </div>
+  <div class="stat-card" style="border-top-color: var(--accent-rose);">
+    <span class="stat-label">ARIMA Forecasting</span>
+    <span class="stat-value" style="color: var(--accent-rose);">+22.47%</span>
+    <span class="stat-subtext">Error reduction vs Naive persistence</span>
+  </div>
+  <div class="stat-card" style="border-top-color: var(--accent-indigo);">
+    <span class="stat-label">Recommender Hit-Rate</span>
+    <span class="stat-value" style="color: var(--accent-indigo);">0.0467</span>
+    <span class="stat-subtext">Leave-One-Out Hit-Rate@10 (N=150)</span>
+  </div>
+</div>
+
+
+
+<!-- Recommender Offline Evaluation Card -->
+<div class="card" style="margin-bottom: 2.5rem;">
+  <div class="card-title">
+    <div style="display: flex; align-items: center; gap: 0.5rem;">
+      <span>🎬 Recommender Offline Evaluation: Leave-One-Out Hit-Rate@10</span>
+    </div>
+    <span class="chip chip-primary">N=150 Evaluated Users</span>
+  </div>
+  <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1.25rem;">
+    Scientific offline evaluation protocol: For each test user with &ge; 15 ratings and &ge; 3 liked movies (&ge; 4.0), one liked movie was randomly hidden. Top-10 recommendations were generated from their remaining liked items.
+  </p>
+  <div class="table-responsive">
+    <table>
+      <thead>
+        <tr>
+          <th>Recommender Method</th>
+          <th>Hit-Rate @ 10</th>
+          <th>Precision @ 10</th>
+          <th>Recall @ 10</th>
+          <th>Algorithmic Mechanism</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Content-Based</strong></td>
+          <td>0.0067</td>
+          <td>0.0007</td>
+          <td>0.0067</td>
+          <td>TF-IDF cosine similarity over movie genres and user tags; handles cold-start niche titles.</td>
+        </tr>
+        <tr>
+          <td><strong>Item-Item CF</strong></td>
+          <td><strong style="color: var(--accent-emerald);">0.0467</strong></td>
+          <td>0.0047</td>
+          <td>0.0467</td>
+          <td>Mean-centered rating vectors on movies with &ge; 20 ratings; strong collaborative accuracy.</td>
+        </tr>
+        <tr>
+          <td><strong>Apriori Rules</strong></td>
+          <td>0.0267</td>
+          <td>0.0027</td>
+          <td>0.0267</td>
+          <td>Frequent market-basket itemsets (Lift &gt; 1.2); high confidence when matching rules fire.</td>
+        </tr>
+        <tr style="background: var(--primary-light);">
+          <td><strong style="color: var(--primary);">Hybrid Engine (Ensemble)</strong></td>
+          <td><strong style="color: var(--primary);">0.0467</strong></td>
+          <td>0.0047</td>
+          <td>0.0467</td>
+          <td>Optimal balance: matches peak CF precision while eliminating cold-start coverage voids.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Classification Comparison Card -->
+<div class="grid grid-2" style="margin-bottom: 2.5rem;">
+  <!-- Rating-Class Prediction -->
+  <div class="card">
+    <div class="card-title">
+      <span>⭐ Rating-Class Classification</span>
+      <span class="chip">3,650 Movies &bull; 80/20 Split</span>
+    </div>
+    <div class="table-responsive">
+      <table>
+        <thead>
+          <tr>
+            <th>Model</th>
+            <th>Accuracy</th>
+            <th>Macro F1</th>
+            <th>Hyperparameters</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Decision Tree</td>
+            <td>50.68%</td>
+            <td>0.4766</td>
+            <td>max_depth = 10</td>
+          </tr>
+          <tr style="background: var(--accent-emerald-bg);">
+            <td><strong style="color: var(--accent-emerald);">Random Forest (Best)</strong></td>
+            <td><strong style="color: var(--accent-emerald);">63.01%</strong></td>
+            <td><strong style="color: var(--accent-emerald);">0.5576</strong></td>
+            <td>n_estimators = 200, depth = 10</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="margin-top: 1rem; font-size: 0.82rem; color: var(--text-muted);">
+      Target distribution: Medium (2,337), Low (873), High (440). Trained with <code>class_weight='balanced'</code>.
+    </div>
+  </div>
+
+  <!-- Genre from Text Prediction -->
+  <div class="card">
+    <div class="card-title">
+      <span>📖 Plot Genre Text Classification</span>
+      <span class="chip">Netflix Descriptions (8 Classes)</span>
+    </div>
+    <div class="table-responsive">
+      <table>
+        <thead>
+          <tr>
+            <th>Model</th>
+            <th>Accuracy</th>
+            <th>Macro F1</th>
+            <th>Parameters</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Multinomial Naive Bayes</td>
+            <td>50.49%</td>
+            <td>0.4757</td>
+            <td>alpha = 0.1, TF-IDF (1-2 grams)</td>
+          </tr>
+          <tr>
+            <td>Logistic Regression</td>
+            <td>51.54%</td>
+            <td>0.5215</td>
+            <td>C = 1.0, balanced weights</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="margin-top: 1rem; font-size: 0.82rem; color: var(--text-muted);">
+      Note: Single-sentence plot descriptions carry natural lexical overlap across action and thrillers.
+    </div>
+  </div>
+</div>
+
+<!-- Regression Models Comparison Card -->
+<div class="card" style="margin-bottom: 2.5rem;">
+  <div class="card-title">
+    <span>📉 Continuous Movie Rating Regression</span>
+    <span class="chip chip-primary">Continuous 0.5 - 5.0 Rating</span>
+  </div>
+  <div class="table-responsive">
+    <table>
+      <thead>
+        <tr>
+          <th>Regression Model</th>
+          <th>Test RMSE</th>
+          <th>Test MAE</th>
+          <th>Test R²</th>
+          <th>Train R²</th>
+          <th>Analysis</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="background: var(--primary-light);">
+          <td><strong style="color: var(--primary);">Lasso Regression (Best)</strong></td>
+          <td><strong style="color: var(--primary);">0.4683</strong></td>
+          <td><strong style="color: var(--primary);">0.3707</strong></td>
+          <td><strong style="color: var(--primary);">0.3105</strong></td>
+          <td>0.3032</td>
+          <td>Optimal &alpha; = 0.00041 &bull; Active L1 sparse feature selection</td>
+        </tr>
+        <tr>
+          <td>Ridge Regression</td>
+          <td>0.4684</td>
+          <td>0.3705</td>
+          <td>0.3103</td>
+          <td>0.3034</td>
+          <td>L2 Penalty shrinks collinear genre indicators</td>
+        </tr>
+        <tr>
+          <td>Linear Regression (OLS)</td>
+          <td>0.4684</td>
+          <td>0.3705</td>
+          <td>0.3103</td>
+          <td>0.3034</td>
+          <td>Unregularized linear baseline</td>
+        </tr>
+        <tr>
+          <td>Decision Tree Regressor</td>
+          <td>0.4810</td>
+          <td>0.3756</td>
+          <td>0.2727</td>
+          <td>0.3553</td>
+          <td>Non-linear regression tree (depth = 5)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div style="margin-top: 1rem; font-size: 0.82rem; color: var(--text-muted);">
+    Lasso active feature weights: Documentary (+0.599), Animation (+0.450), Drama (+0.290), Children (-0.318), Horror (-0.196).
+  </div>
+</div>
+
+<!-- ARIMA Time Series Performance Card -->
+<div class="card" style="margin-bottom: 2rem;">
+  <div class="card-title">
+    <span>⏱️ Time Series &amp; ARIMA Forecasting</span>
+    <span class="chip chip-emerald">12-Month Out-of-Sample Verification</span>
+  </div>
+  <div class="table-responsive">
+    <table>
+      <thead>
+        <tr>
+          <th>Series</th>
+          <th>Time Horizon</th>
+          <th>Stationarity (d=1)</th>
+          <th>Order</th>
+          <th>ARIMA RMSE</th>
+          <th>Naive RMSE</th>
+          <th>Variance Reduction</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Netflix Monthly Additions</strong></td>
+          <td>2016-01 to 2021-08 (68 mos)</td>
+          <td>p = 2.82e-08 (Stationary)</td>
+          <td>ARIMA(3, 1, 3)</td>
+          <td><strong style="color: var(--accent-emerald);">41.42</strong></td>
+          <td>53.42</td>
+          <td><strong style="color: var(--accent-emerald);">+22.47% over Naive</strong></td>
+        </tr>
+        <tr>
+          <td><strong>MovieLens Ratings (log1p)</strong></td>
+          <td>2000-01 to 2018-08 (224 mos)</td>
+          <td>p = 2.67e-13 (Stationary)</td>
+          <td>ARIMA(1, 1, 2)</td>
+          <td>460.52</td>
+          <td>506.84</td>
+          <td>+9.14% over Naive</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

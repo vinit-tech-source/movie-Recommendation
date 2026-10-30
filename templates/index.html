@@ -1,0 +1,203 @@
+{% extends "base.html" %}
+
+{% block title %}CineMetrics - AI Cinema Intelligence &amp; OTT Analytics{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="page-header" style="text-align: center; max-width: 880px; margin: 1.5rem auto 2.75rem;">
+  <div class="header-badge">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+      <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+    </svg>
+    <span>Intelligent Cinema Intelligence &amp; Forecasting Engine</span>
+  </div>
+  <h1 class="page-title" style="font-size: 2.85rem; font-weight: 800; line-height: 1.2; margin-top: 0.5rem; color: var(--text-main);">
+    Discover, Predict &amp; Forecast Cinema Trends
+  </h1>
+  <p class="page-subtitle" style="margin: 0.85rem auto 0; font-size: 1.1rem; color: var(--text-muted); line-height: 1.6;">
+    Unified analytical platform combining MovieLens community ratings and Netflix streaming catalogs with Association Mining, Machine Learning Classifiers, Lasso Regression, and ARIMA Time-Series Projections.
+  </p>
+</div>
+
+<!-- High-Impact Search Section -->
+<div class="hero-search-wrapper">
+  <div class="search-glow-box">
+    <label for="home-search" style="display: block; font-size: 0.92rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.75rem;">
+      Search Catalog with Instant Title Autocomplete
+    </label>
+    <div class="search-input-group">
+      <div class="search-icon-inside">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </div>
+      <input type="text" id="home-search" placeholder="Type a movie title (e.g., Matrix, Toy Story, Godfather, Inception)..." autocomplete="off">
+      <span class="search-shortcut-hint">Ctrl + K</span>
+    </div>
+    <div id="home-search-dropdown" class="search-dropdown"></div>
+  </div>
+
+  <div id="selected-movie-preview" style="margin-top: 1.25rem; display: none;"></div>
+</div>
+
+<!-- Luminous Headline Stats -->
+<div class="grid grid-4" style="margin-bottom: 3rem;">
+  <div class="stat-card" style="border-top-color: var(--primary);">
+    <span class="stat-label">Warehouse Ratings</span>
+    <span class="stat-value" style="color: var(--primary);">100,836</span>
+    <span class="stat-subtext">MovieLens 100k verified fact ratings</span>
+  </div>
+  <div class="stat-card" style="border-top-color: var(--accent-indigo);">
+    <span class="stat-label">Catalog Movies</span>
+    <span class="stat-value" style="color: var(--accent-indigo);">9,742</span>
+    <span class="stat-subtext">19 conformed cinematic genres</span>
+  </div>
+  <div class="stat-card" style="border-top-color: var(--accent-emerald);">
+    <span class="stat-label">Netflix Titles</span>
+    <span class="stat-value" style="color: var(--accent-emerald);">8,807</span>
+    <span class="stat-subtext">42 streaming categories &bull; 2008&ndash;2021</span>
+  </div>
+  <div class="stat-card" style="border-top-color: var(--accent-amber);">
+    <span class="stat-label">Apriori Co-View Rules</span>
+    <span class="stat-value" style="color: var(--accent-amber);">935</span>
+    <span class="stat-subtext">Mined high-lift association rules</span>
+  </div>
+</div>
+
+<!-- Feature Navigation Grid -->
+<div class="grid grid-2" style="margin-bottom: 2rem;">
+  <div class="card">
+    <div class="card-title">
+      <div style="display: flex; align-items: center; gap: 0.65rem;">
+        <span style="font-size: 1.4rem;">🎬</span>
+        <span>Hybrid Recommendation Engine</span>
+      </div>
+      <span class="chip chip-primary">Ensemble</span>
+    </div>
+    <p style="color: var(--text-muted); font-size: 0.92rem; margin-bottom: 1.5rem; line-height: 1.6;">
+      Multi-faceted recommendation system fusing Content-based TF-IDF, Item-Item Collaborative Filtering (mean-centered cosine), and Apriori association rules with natural language explanations.
+    </p>
+    <a href="/recommend" class="btn btn-primary btn-sm">Explore Recommendations &rarr;</a>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div style="display: flex; align-items: center; gap: 0.65rem;">
+        <span style="font-size: 1.4rem;">🎯</span>
+        <span>Multi-Modal Predictive Models</span>
+      </div>
+      <span class="chip" style="background: var(--accent-indigo-bg); color: var(--accent-indigo); border-color: var(--accent-indigo-border);">Random Forest</span>
+    </div>
+    <p style="color: var(--text-muted); font-size: 0.92rem; margin-bottom: 1.5rem; line-height: 1.6;">
+      Predict movie rating classes (Low, Medium, High) with balanced Random Forests, estimate continuous ratings via regularized Lasso regression, and classify plot synopses via Naive Bayes.
+    </p>
+    <a href="/predict" class="btn btn-secondary btn-sm">Launch Predictor &rarr;</a>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div style="display: flex; align-items: center; gap: 0.65rem;">
+        <span style="font-size: 1.4rem;">📈</span>
+        <span>OTT Trends &amp; ARIMA Projections</span>
+      </div>
+      <span class="chip chip-emerald">Time Series</span>
+    </div>
+    <p style="color: var(--text-muted); font-size: 0.92rem; margin-bottom: 1.5rem; line-height: 1.6;">
+      Analyze historical content expansion on Netflix and viewership dynamics on MovieLens. Interactive 12-month future projections with 95% confidence intervals and ADF stationarity tests.
+    </p>
+    <a href="/trends" class="btn btn-secondary btn-sm">View Trend Forecasts &rarr;</a>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div style="display: flex; align-items: center; gap: 0.65rem;">
+        <span style="font-size: 1.4rem;">📊</span>
+        <span>Empirical Model Benchmarks</span>
+      </div>
+      <span class="chip chip-amber">Audit</span>
+    </div>
+    <p style="color: var(--text-muted); font-size: 0.92rem; margin-bottom: 1.5rem; line-height: 1.6;">
+      Complete evaluation metrics: Accuracy, Macro F1, RMSE, MAE, R², Leave-One-Out Hit-Rate@10, confusion matrices, and the syllabus Course Outcome (CO1–CO5) mapping matrix.
+    </p>
+    <a href="/performance" class="btn btn-secondary btn-sm">View Model Dashboard &rarr;</a>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  // Home search bar with debounced autocomplete
+  const searchInput = document.getElementById('home-search');
+  const dropdown = document.getElementById('home-search-dropdown');
+  const preview = document.getElementById('selected-movie-preview');
+
+  // Focus on Ctrl+K
+  document.addEventListener('keydown', (e) => {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+      e.preventDefault();
+      searchInput.focus();
+    }
+  });
+
+  searchInput.addEventListener('input', debounce(async (e) => {
+    const q = e.target.value.trim();
+    if (q.length < 1) {
+      dropdown.style.display = 'none';
+      return;
+    }
+
+    try {
+      const res = await fetch(`/api/search?q=${encodeURIComponent(q)}&limit=8`);
+      const data = await res.json();
+      if (!data.results || data.results.length === 0) {
+        dropdown.innerHTML = '<div style="padding: 1.25rem; color: var(--text-dim); text-align: center;">No matching titles found</div>';
+        dropdown.style.display = 'block';
+        return;
+      }
+
+      dropdown.innerHTML = data.results.map(m => `
+        <div class="search-item" onclick="selectMovie(${m.movie_id}, '${m.title.replace(/'/g, "\\'")}', '${m.genres.join(', ')}', ${m.avg_rating}, ${m.n_ratings})">
+          <div>
+            <div class="search-item-title">${m.title}</div>
+            <div class="search-item-meta">${m.genres.join(' &bull; ')}</div>
+          </div>
+          <div style="text-align: right;">
+            <span class="chip chip-amber" style="font-weight: 700;">★ ${m.avg_rating.toFixed(1)}</span>
+            <div style="font-size: 0.75rem; color: var(--text-dim); margin-top: 3px;">${m.n_ratings} ratings</div>
+          </div>
+        </div>
+      `).join('');
+      dropdown.style.display = 'block';
+    } catch (err) {
+      console.error(err);
+    }
+  }, 200));
+
+  function selectMovie(id, title, genres, rating, count) {
+    dropdown.style.display = 'none';
+    preview.style.display = 'block';
+    preview.innerHTML = `
+      <div class="card" style="background: #ffffff; border: 1.5px solid var(--primary-border); box-shadow: var(--shadow-hover);">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+          <div>
+            <h3 style="font-size: 1.25rem; font-weight: 800; color: var(--text-main);">${title}</h3>
+            <p style="color: var(--text-muted); font-size: 0.88rem; margin-top: 0.25rem;">Genres: ${genres || 'N/A'}</p>
+            <p style="color: var(--text-dim); font-size: 0.82rem; margin-top: 0.2rem;">Avg Rating: ★ ${rating.toFixed(2)} &bull; ${count} community ratings</p>
+          </div>
+          <a href="/recommend?movie_id=${id}" class="btn btn-primary">
+            Get Recommendations for this Movie &rarr;
+          </a>
+        </div>
+      </div>
+    `;
+  }
+
+  // Close dropdown on click outside
+  document.addEventListener('click', (e) => {
+    if (!searchInput.contains(e.target) && !dropdown.contains(e.target)) {
+      dropdown.style.display = 'none';
+    }
+  });
+</script>
+{% endblock %}

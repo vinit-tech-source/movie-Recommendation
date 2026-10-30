@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% block title %}Smart Recommendations - CineMetrics{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div class="header-badge">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+    </svg>
+    <span>Hybrid Recommendation Engine</span>
+  </div>
+  <h1 class="page-title">Personalized Cinema &amp; OTT Recommendations</h1>
+  <p class="page-subtitle">
+    Generate targeted recommendations by combining Content-based TF-IDF document similarity, Item-Item Collaborative Filtering, and high-lift Apriori co-viewing association rules with explainable reasoning.
+  </p>
+</div>
+
+<!-- Controls Card -->
+<div class="card" style="margin-bottom: 2.25rem;">
+  <div class="grid grid-2" style="align-items: flex-end; gap: 1.5rem;">
+    <!-- Movie Selector Autocomplete -->
+    <div class="form-group" style="margin-bottom: 0;">
+      <label class="form-label">Seed Movie Selection</label>
+      <div style="position: relative;">
+        <input type="text" id="rec-search" class="form-control" placeholder="Type title to search (e.g., Matrix, Toy Story, Pulp Fiction)..." autocomplete="off">
+        <div id="rec-dropdown" class="search-dropdown"></div>
+      </div>
+      <input type="hidden" id="selected-movie-id" value="1">
+      <div id="selected-seed-display" style="margin-top: 0.6rem; font-size: 0.88rem; color: var(--primary); font-weight: 700; display: flex; align-items: center; gap: 0.45rem;">
+        <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--primary);"></span>
+        <span>Selected: Toy Story (1995) [ID: 1]</span>
+      </div>
+    </div>
+
+    <!-- Method & Count selector -->
+    <div style="display: flex; gap: 1rem; align-items: flex-end;">
+      <div class="form-group" style="margin-bottom: 0; flex: 2;">
+        <label class="form-label">Algorithm Strategy</label>
+        <select id="rec-method" class="form-select">
+          <option value="hybrid" selected>Hybrid Ensemble (0.4 Content + 0.3 CF + 0.3 Rules)</option>
+          <option value="content">Content-Based (TF-IDF Genres &amp; Tags)</option>
+          <option value="cf">Item-Item Collaborative (Mean-Centered Cosine)</option>
+          <option value="rules">Association Rules (Apriori Co-View Baskets)</option>
+        </select>
+      </div>
+
+      <div class="form-group" style="margin-bottom: 0; flex: 1;">
+        <label class="form-label">Top Results</label>
+        <select id="rec-k" class="form-select">
+          <option value="5">Top 5</option>
+          <option value="10" selected>Top 10</option>
+          <option value="15">Top 15</option>
+        </select>
+      </div>
+
+      <button id="btn-fetch-recs" class="btn btn-primary" style="height: 42px; white-space: nowrap;">
+        Generate &rarr;
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Recommendations Container -->
+<div id="recs-loading" class="loading-box" style="display: none;">
+  <div class="spinner"></div>
+  <p style="font-weight: 600; color: var(--text-body);">Calculating cross-similarity matrices and querying association rules...</p>
+</div>
+
+<div id="recs-container">
+  <div id="recs-grid" class="grid grid-2" style="margin-bottom: 2.5rem;"></div>
+
+  <!-- Association Rules Table -->
+  <div id="rules-section" class="card" style="display: none;">
+    <div class="card-title">
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <span>🔗 Co-Viewing Association Rules (Mined from Viewing Baskets)</span>
+      </div>
+      <span class="chip chip-primary">Apriori Rules</span>
+    </div>
+    <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1.25rem;">
+      Empirical market-basket patterns discovered from users who rated both titles &ge; 4.0. High lift indicates strong complementary viewership.
+    </p>
+    <div class="table-responsive">
+      <table>
+        <thead>
+          <tr>
+            <th>Antecedent (If User Liked)</th>
+            <th>Consequent (Then Also Liked)</th>
+            <th>Support</th>
+            <th>Confidence</th>
+            <th>Lift</th>
+          </tr>
+        </thead>
+        <tbody id="rules-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/recommend.js') }}"></script>
+{% endblock %}

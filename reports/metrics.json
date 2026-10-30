@@ -1,0 +1,855 @@
+{
+  "pipeline_version": "1.0.0",
+  "timestamp": "2026-10-29 22:48:54",
+  "apriori": {
+    "user_count": 599,
+    "movie_count": 300,
+    "strict_rule_count": 935,
+    "lenient_rule_count": 2206,
+    "top_rules": [
+      {
+        "antecedent_ids": [
+          6874
+        ],
+        "consequent_ids": [
+          7438
+        ],
+        "antecedent_titles": [
+          "Kill Bill: Vol. 1 (2003)"
+        ],
+        "consequent_titles": [
+          "Kill Bill: Vol. 2 (2004)"
+        ],
+        "antecedent_str": "Kill Bill: Vol. 1 (2003)",
+        "consequent_str": "Kill Bill: Vol. 2 (2004)",
+        "support": 0.1085,
+        "confidence": 0.7386,
+        "lift": 6.145,
+        "leverage": 0.0909
+      },
+      {
+        "antecedent_ids": [
+          7438
+        ],
+        "consequent_ids": [
+          6874
+        ],
+        "antecedent_titles": [
+          "Kill Bill: Vol. 2 (2004)"
+        ],
+        "consequent_titles": [
+          "Kill Bill: Vol. 1 (2003)"
+        ],
+        "antecedent_str": "Kill Bill: Vol. 2 (2004)",
+        "consequent_str": "Kill Bill: Vol. 1 (2003)",
+        "support": 0.1085,
+        "confidence": 0.9028,
+        "lift": 6.145,
+        "leverage": 0.0909
+      },
+      {
+        "antecedent_ids": [
+          858,
+          1213
+        ],
+        "consequent_ids": [
+          1221
+        ],
+        "antecedent_titles": [
+          "Godfather, The (1972)",
+          "Goodfellas (1990)"
+        ],
+        "consequent_titles": [
+          "Godfather: Part II, The (1974)"
+        ],
+        "antecedent_str": "Godfather, The (1972), Goodfellas (1990)",
+        "consequent_str": "Godfather: Part II, The (1974)",
+        "support": 0.1018,
+        "confidence": 0.7922,
+        "lift": 4.4349,
+        "leverage": 0.0789
+      },
+      {
+        "antecedent_ids": [
+          2571,
+          589
+        ],
+        "consequent_ids": [
+          1240
+        ],
+        "antecedent_titles": [
+          "Matrix, The (1999)",
+          "Terminator 2: Judgment Day (1991)"
+        ],
+        "consequent_titles": [
+          "Terminator, The (1984)"
+        ],
+        "antecedent_str": "Matrix, The (1999), Terminator 2: Judgment Day (1991)",
+        "consequent_str": "Terminator, The (1984)",
+        "support": 0.1035,
+        "confidence": 0.6739,
+        "lift": 4.2944,
+        "leverage": 0.0794
+      },
+      {
+        "antecedent_ids": [
+          1240
+        ],
+        "consequent_ids": [
+          2571,
+          589
+        ],
+        "antecedent_titles": [
+          "Terminator, The (1984)"
+        ],
+        "consequent_titles": [
+          "Matrix, The (1999)",
+          "Terminator 2: Judgment Day (1991)"
+        ],
+        "antecedent_str": "Terminator, The (1984)",
+        "consequent_str": "Matrix, The (1999), Terminator 2: Judgment Day (1991)",
+        "support": 0.1035,
+        "confidence": 0.6596,
+        "lift": 4.2944,
+        "leverage": 0.0794
+      },
+      {
+        "antecedent_ids": [
+          50,
+          858
+        ],
+        "consequent_ids": [
+          1221
+        ],
+        "antecedent_titles": [
+          "Usual Suspects, The (1995)",
+          "Godfather, The (1972)"
+        ],
+        "consequent_titles": [
+          "Godfather: Part II, The (1974)"
+        ],
+        "antecedent_str": "Usual Suspects, The (1995), Godfather, The (1972)",
+        "consequent_str": "Godfather: Part II, The (1974)",
+        "support": 0.1052,
+        "confidence": 0.759,
+        "lift": 4.2492,
+        "leverage": 0.0804
+      },
+      {
+        "antecedent_ids": [
+          593,
+          7153
+        ],
+        "consequent_ids": [
+          5952
+        ],
+        "antecedent_titles": [
+          "Silence of the Lambs, The (1991)",
+          "Lord of the Rings: The Return of the King, The (2003)"
+        ],
+        "consequent_titles": [
+          "Lord of the Rings: The Two Towers, The (2002)"
+        ],
+        "antecedent_str": "Silence of the Lambs, The (1991), Lord of the Rings: The Return of the King, The (2003)",
+        "consequent_str": "Lord of the Rings: The Two Towers, The (2002)",
+        "support": 0.1052,
+        "confidence": 0.913,
+        "lift": 4.1749,
+        "leverage": 0.08
+      },
+      {
+        "antecedent_ids": [
+          5952,
+          318
+        ],
+        "consequent_ids": [
+          7153
+        ],
+        "antecedent_titles": [
+          "Lord of the Rings: The Two Towers, The (2002)",
+          "Shawshank Redemption, The (1994)"
+        ],
+        "consequent_titles": [
+          "Lord of the Rings: The Return of the King, The (2003)"
+        ],
+        "antecedent_str": "Lord of the Rings: The Two Towers, The (2002), Shawshank Redemption, The (1994)",
+        "consequent_str": "Lord of the Rings: The Return of the King, The (2003)",
+        "support": 0.1219,
+        "confidence": 0.9733,
+        "lift": 4.1645,
+        "leverage": 0.0926
+      },
+      {
+        "antecedent_ids": [
+          1200
+        ],
+        "consequent_ids": [
+          1214
+        ],
+        "antecedent_titles": [
+          "Aliens (1986)"
+        ],
+        "consequent_titles": [
+          "Alien (1979)"
+        ],
+        "antecedent_str": "Aliens (1986)",
+        "consequent_str": "Alien (1979)",
+        "support": 0.1085,
+        "confidence": 0.7647,
+        "lift": 4.1642,
+        "leverage": 0.0825
+      },
+      {
+        "antecedent_ids": [
+          5952,
+          356
+        ],
+        "consequent_ids": [
+          7153
+        ],
+        "antecedent_titles": [
+          "Lord of the Rings: The Two Towers, The (2002)",
+          "Forrest Gump (1994)"
+        ],
+        "consequent_titles": [
+          "Lord of the Rings: The Return of the King, The (2003)"
+        ],
+        "antecedent_str": "Lord of the Rings: The Two Towers, The (2002), Forrest Gump (1994)",
+        "consequent_str": "Lord of the Rings: The Return of the King, The (2003)",
+        "support": 0.1085,
+        "confidence": 0.9701,
+        "lift": 4.1509,
+        "leverage": 0.0824
+      },
+      {
+        "antecedent_ids": [
+          5952,
+          593
+        ],
+        "consequent_ids": [
+          7153
+        ],
+        "antecedent_titles": [
+          "Lord of the Rings: The Two Towers, The (2002)",
+          "Silence of the Lambs, The (1991)"
+        ],
+        "consequent_titles": [
+          "Lord of the Rings: The Return of the King, The (2003)"
+        ],
+        "antecedent_str": "Lord of the Rings: The Two Towers, The (2002), Silence of the Lambs, The (1991)",
+        "consequent_str": "Lord of the Rings: The Return of the King, The (2003)",
+        "support": 0.1052,
+        "confidence": 0.9692,
+        "lift": 4.1469,
+        "leverage": 0.0798
+      },
+      {
+        "antecedent_ids": [
+          4993,
+          6539
+        ],
+        "consequent_ids": [
+          7153
+        ],
+        "antecedent_titles": [
+          "Lord of the Rings: The Fellowship of the Ring, The (2001)",
+          "Pirates of the Caribbean: The Curse of the Black Pearl (2003)"
+        ],
+        "consequent_titles": [
+          "Lord of the Rings: The Return of the King, The (2003)"
+        ],
+        "antecedent_str": "Lord of the Rings: The Fellowship of the Ring, The (2001), Pirates of the Caribbean: The Curse of the Black Pearl (2003)",
+        "consequent_str": "Lord of the Rings: The Return of the King, The (2003)",
+        "support": 0.1035,
+        "confidence": 0.9688,
+        "lift": 4.1449,
+        "leverage": 0.0785
+      },
+      {
+        "antecedent_ids": [
+          1210,
+          1198
+        ],
+        "consequent_ids": [
+          1291
+        ],
+        "antecedent_titles": [
+          "Star Wars: Episode VI - Return of the Jedi (1983)",
+          "Raiders of the Lost Ark (Indiana Jones and the Raiders of the Lost Ark) (1981)"
+        ],
+        "consequent_titles": [
+          "Indiana Jones and the Last Crusade (1989)"
+        ],
+        "antecedent_str": "Star Wars: Episode VI - Return of the Jedi (1983), Raiders of the Lost Ark (Indiana Jones and the Raiders of the Lost Ark) (1981)",
+        "consequent_str": "Indiana Jones and the Last Crusade (1989)",
+        "support": 0.1035,
+        "confidence": 0.7209,
+        "lift": 4.1127,
+        "leverage": 0.0783
+      },
+      {
+        "antecedent_ids": [
+          5952,
+          2959
+        ],
+        "consequent_ids": [
+          7153
+        ],
+        "antecedent_titles": [
+          "Lord of the Rings: The Two Towers, The (2002)",
+          "Fight Club (1999)"
+        ],
+        "consequent_titles": [
+          "Lord of the Rings: The Return of the King, The (2003)"
+        ],
+        "antecedent_str": "Lord of the Rings: The Two Towers, The (2002), Fight Club (1999)",
+        "consequent_str": "Lord of the Rings: The Return of the King, The (2003)",
+        "support": 0.1169,
+        "confidence": 0.9589,
+        "lift": 4.1027,
+        "leverage": 0.0884
+      },
+      {
+        "antecedent_ids": [
+          5952,
+          296
+        ],
+        "consequent_ids": [
+          7153
+        ],
+        "antecedent_titles": [
+          "Lord of the Rings: The Two Towers, The (2002)",
+          "Pulp Fiction (1994)"
+        ],
+        "consequent_titles": [
+          "Lord of the Rings: The Return of the King, The (2003)"
+        ],
+        "antecedent_str": "Lord of the Rings: The Two Towers, The (2002), Pulp Fiction (1994)",
+        "consequent_str": "Lord of the Rings: The Return of the King, The (2003)",
+        "support": 0.1102,
+        "confidence": 0.9565,
+        "lift": 4.0925,
+        "leverage": 0.0833
+      },
+      {
+        "antecedent_ids": [
+          5952,
+          2571
+        ],
+        "consequent_ids": [
+          7153
+        ],
+        "antecedent_titles": [
+          "Lord of the Rings: The Two Towers, The (2002)",
+          "Matrix, The (1999)"
+        ],
+        "consequent_titles": [
+          "Lord of the Rings: The Return of the King, The (2003)"
+        ],
+        "antecedent_str": "Lord of the Rings: The Two Towers, The (2002), Matrix, The (1999)",
+        "consequent_str": "Lord of the Rings: The Return of the King, The (2003)",
+        "support": 0.1352,
+        "confidence": 0.9529,
+        "lift": 4.0772,
+        "leverage": 0.1021
+      },
+      {
+        "antecedent_ids": [
+          296,
+          1213
+        ],
+        "consequent_ids": [
+          1089
+        ],
+        "antecedent_titles": [
+          "Pulp Fiction (1994)",
+          "Goodfellas (1990)"
+        ],
+        "consequent_titles": [
+          "Reservoir Dogs (1992)"
+        ],
+        "antecedent_str": "Pulp Fiction (1994), Goodfellas (1990)",
+        "consequent_str": "Reservoir Dogs (1992)",
+        "support": 0.1018,
+        "confidence": 0.7176,
+        "lift": 4.0554,
+        "leverage": 0.0767
+      },
+      {
+        "antecedent_ids": [
+          5952,
+          4993
+        ],
+        "consequent_ids": [
+          7153
+        ],
+        "antecedent_titles": [
+          "Lord of the Rings: The Two Towers, The (2002)",
+          "Lord of the Rings: The Fellowship of the Ring, The (2001)"
+        ],
+        "consequent_titles": [
+          "Lord of the Rings: The Return of the King, The (2003)"
+        ],
+        "antecedent_str": "Lord of the Rings: The Two Towers, The (2002), Lord of the Rings: The Fellowship of the Ring, The (2001)",
+        "consequent_str": "Lord of the Rings: The Return of the King, The (2003)",
+        "support": 0.177,
+        "confidence": 0.9464,
+        "lift": 4.0494,
+        "leverage": 0.1333
+      },
+      {
+        "antecedent_ids": [
+          7153
+        ],
+        "consequent_ids": [
+          5952,
+          4993
+        ],
+        "antecedent_titles": [
+          "Lord of the Rings: The Return of the King, The (2003)"
+        ],
+        "consequent_titles": [
+          "Lord of the Rings: The Two Towers, The (2002)",
+          "Lord of the Rings: The Fellowship of the Ring, The (2001)"
+        ],
+        "antecedent_str": "Lord of the Rings: The Return of the King, The (2003)",
+        "consequent_str": "Lord of the Rings: The Two Towers, The (2002), Lord of the Rings: The Fellowship of the Ring, The (2001)",
+        "support": 0.177,
+        "confidence": 0.7571,
+        "lift": 4.0494,
+        "leverage": 0.1333
+      },
+      {
+        "antecedent_ids": [
+          5952,
+          260
+        ],
+        "consequent_ids": [
+          7153
+        ],
+        "antecedent_titles": [
+          "Lord of the Rings: The Two Towers, The (2002)",
+          "Star Wars: Episode IV - A New Hope (1977)"
+        ],
+        "consequent_titles": [
+          "Lord of the Rings: The Return of the King, The (2003)"
+        ],
+        "antecedent_str": "Lord of the Rings: The Two Towers, The (2002), Star Wars: Episode IV - A New Hope (1977)",
+        "consequent_str": "Lord of the Rings: The Return of the King, The (2003)",
+        "support": 0.1152,
+        "confidence": 0.9452,
+        "lift": 4.0441,
+        "leverage": 0.0867
+      }
+    ]
+  },
+  "classification": {
+    "genre_classification": {
+      "source_used": "netflix_descriptions",
+      "classes": [
+        "Action & Adventure",
+        "Children & Family Movies",
+        "Comedies",
+        "Crime TV Shows",
+        "Documentaries",
+        "Dramas",
+        "International TV Shows",
+        "Kids' TV"
+      ],
+      "sample_count": 6664,
+      "naive_bayes": {
+        "best_alpha": 0.1,
+        "accuracy": 0.5049,
+        "precision_macro": 0.5552,
+        "recall_macro": 0.4517,
+        "f1_macro": 0.4757,
+        "f1_weighted": 0.4947,
+        "classification_report": {
+          "Action & Adventure": {
+            "precision": 0.5529411764705883,
+            "recall": 0.5465116279069767,
+            "f1-score": 0.5497076023391813,
+            "support": 172.0
+          },
+          "Children & Family Movies": {
+            "precision": 0.5784313725490197,
+            "recall": 0.48760330578512395,
+            "f1-score": 0.5291479820627802,
+            "support": 121.0
+          },
+          "Comedies": {
+            "precision": 0.4867924528301887,
+            "recall": 0.5330578512396694,
+            "f1-score": 0.5088757396449705,
+            "support": 242.0
+          },
+          "Crime TV Shows": {
+            "precision": 0.7037037037037037,
+            "recall": 0.2375,
+            "f1-score": 0.35514018691588783,
+            "support": 80.0
+          },
+          "Documentaries": {
+            "precision": 0.6578947368421053,
+            "recall": 0.6024096385542169,
+            "f1-score": 0.6289308176100629,
+            "support": 166.0
+          },
+          "Dramas": {
+            "precision": 0.44214876033057854,
+            "recall": 0.66875,
+            "f1-score": 0.5323383084577115,
+            "support": 320.0
+          },
+          "International TV Shows": {
+            "precision": 0.34375,
+            "recall": 0.2129032258064516,
+            "f1-score": 0.26294820717131473,
+            "support": 155.0
+          },
+          "Kids' TV": {
+            "precision": 0.6756756756756757,
+            "recall": 0.3246753246753247,
+            "f1-score": 0.43859649122807015,
+            "support": 77.0
+          },
+          "accuracy": 0.5048762190547637,
+          "macro avg": {
+            "precision": 0.5551672348002324,
+            "recall": 0.4516763717459704,
+            "f1-score": 0.47571066692874736,
+            "support": 1333.0
+          },
+          "weighted avg": {
+            "precision": 0.5215322992957061,
+            "recall": 0.5048762190547637,
+            "f1-score": 0.4946852466205122,
+            "support": 1333.0
+          }
+        }
+      },
+      "logistic_regression": {
+        "accuracy": 0.5154,
+        "f1_macro": 0.5215
+      }
+    },
+    "rating_classification": {
+      "sample_count": 3650,
+      "feature_count": 22,
+      "decision_tree": {
+        "max_depth": 10,
+        "accuracy": 0.5068,
+        "f1_macro": 0.4766
+      },
+      "random_forest": {
+        "n_estimators": 200,
+        "max_depth": 10,
+        "accuracy": 0.6301,
+        "precision_macro": 0.5465,
+        "recall_macro": 0.5783,
+        "f1_macro": 0.5576,
+        "f1_weighted": 0.6368,
+        "classification_report": {
+          "High": {
+            "precision": 0.36363636363636365,
+            "recall": 0.4090909090909091,
+            "f1-score": 0.3850267379679144,
+            "support": 88.0
+          },
+          "Low": {
+            "precision": 0.5176991150442478,
+            "recall": 0.6685714285714286,
+            "f1-score": 0.5835411471321695,
+            "support": 175.0
+          },
+          "Medium": {
+            "precision": 0.7580246913580246,
+            "recall": 0.6573875802997858,
+            "f1-score": 0.7041284403669725,
+            "support": 467.0
+          },
+          "accuracy": 0.6301369863013698,
+          "macro avg": {
+            "precision": 0.5464533900128786,
+            "recall": 0.5783499726540412,
+            "f1-score": 0.5575654418223522,
+            "support": 730.0
+          },
+          "weighted avg": {
+            "precision": 0.6528696931464945,
+            "recall": 0.6301369863013698,
+            "f1-score": 0.6367534730694278,
+            "support": 730.0
+          }
+        },
+        "top_features": {
+          "year": 0.2281410316731542,
+          "log_n_ratings": 0.1654021176172552,
+          "n_tags": 0.14816881306241636,
+          "Drama": 0.11433162239894301,
+          "Comedy": 0.03663354991655708,
+          "Action": 0.03437556648039708,
+          "Horror": 0.027704398259472737,
+          "Animation": 0.02486758667583468,
+          "Thriller": 0.024487635236763308,
+          "Sci-Fi": 0.024287252723712016,
+          "Crime": 0.019696306885470413,
+          "Adventure": 0.01873413248309975
+        }
+      }
+    }
+  },
+  "regression": {
+    "models": {
+      "LinearRegression": {
+        "train_mse": 0.2298,
+        "test_mse": 0.2194,
+        "train_rmse": 0.4794,
+        "test_rmse": 0.4684,
+        "train_mae": 0.3756,
+        "test_mae": 0.3705,
+        "train_r2": 0.3034,
+        "test_r2": 0.3103
+      },
+      "Ridge": {
+        "train_mse": 0.2298,
+        "test_mse": 0.2194,
+        "train_rmse": 0.4794,
+        "test_rmse": 0.4684,
+        "train_mae": 0.3757,
+        "test_mae": 0.3705,
+        "train_r2": 0.3034,
+        "test_r2": 0.3103
+      },
+      "Lasso": {
+        "train_mse": 0.2299,
+        "test_mse": 0.2193,
+        "train_rmse": 0.4794,
+        "test_rmse": 0.4683,
+        "train_mae": 0.3758,
+        "test_mae": 0.3707,
+        "train_r2": 0.3032,
+        "test_r2": 0.3105
+      },
+      "DecisionTree": {
+        "train_mse": 0.2127,
+        "test_mse": 0.2313,
+        "train_rmse": 0.4612,
+        "test_rmse": 0.481,
+        "train_mae": 0.3586,
+        "test_mae": 0.3756,
+        "train_r2": 0.3553,
+        "test_r2": 0.2727
+      }
+    },
+    "best_model": "Lasso",
+    "lasso_alpha": 0.00040949150623804275,
+    "lasso_non_zero_coefficients": {
+      "year": -0.0968,
+      "log_n_ratings": 0.1596,
+      "n_tags": 0.0314,
+      "Action": -0.1187,
+      "Animation": 0.4497,
+      "Children": -0.3179,
+      "Comedy": -0.135,
+      "Crime": 0.094,
+      "Documentary": 0.5992,
+      "Drama": 0.2904,
+      "Fantasy": -0.0037,
+      "Film-Noir": 0.2236,
+      "Horror": -0.1962,
+      "IMAX": 0.1226,
+      "Musical": 0.0116,
+      "Mystery": 0.08,
+      "Romance": -0.0231,
+      "Sci-Fi": -0.0312,
+      "Thriller": -0.078,
+      "War": 0.104,
+      "Western": 0.17
+    }
+  },
+  "time_series": {
+    "netflix": {
+      "order": [
+        3,
+        1,
+        3
+      ],
+      "aic": 660.23,
+      "data_points": 68,
+      "date_range": [
+        "2016-01",
+        "2021-08"
+      ],
+      "stationarity_adf": {
+        "raw": {
+          "adf_statistic": -2.9141,
+          "p_value": 0.0437341,
+          "critical_values": {
+            "1%": -3.532,
+            "5%": -2.906,
+            "10%": -2.59
+          },
+          "is_stationary": true
+        },
+        "differenced_d1": {
+          "adf_statistic": -6.3367,
+          "p_value": 2.81933e-08,
+          "critical_values": {
+            "1%": -3.539,
+            "5%": -2.909,
+            "10%": -2.592
+          },
+          "is_stationary": true
+        }
+      },
+      "holdout_evaluation": {
+        "holdout_months": 12,
+        "arima_rmse": 41.417,
+        "naive_rmse": 53.422,
+        "seasonal_naive_rmse": 57.057,
+        "improvement_over_naive_pct": 22.47
+      },
+      "diagnostics": {
+        "aic": 660.23,
+        "bic": 675.66,
+        "ljung_box_p_value": 0.9761,
+        "residuals_white_noise": true
+      },
+      "forecast_next_12_months": [
+        {
+          "date": "2021-09",
+          "forecast": 193.5,
+          "lower_ci": 136.3,
+          "upper_ci": 250.7
+        },
+        {
+          "date": "2021-10",
+          "forecast": 177.0,
+          "lower_ci": 106.4,
+          "upper_ci": 247.6
+        },
+        {
+          "date": "2021-11",
+          "forecast": 191.3,
+          "lower_ci": 118.6,
+          "upper_ci": 263.9
+        },
+        {
+          "date": "2021-12",
+          "forecast": 179.5,
+          "lower_ci": 100.5,
+          "upper_ci": 258.5
+        },
+        {
+          "date": "2022-01",
+          "forecast": 188.1,
+          "lower_ci": 107.7,
+          "upper_ci": 268.5
+        },
+        {
+          "date": "2022-02",
+          "forecast": 182.8,
+          "lower_ci": 97.6,
+          "upper_ci": 268.0
+        },
+        {
+          "date": "2022-03",
+          "forecast": 184.9,
+          "lower_ci": 97.9,
+          "upper_ci": 271.9
+        },
+        {
+          "date": "2022-04",
+          "forecast": 185.6,
+          "lower_ci": 95.1,
+          "upper_ci": 276.1
+        },
+        {
+          "date": "2022-05",
+          "forecast": 182.6,
+          "lower_ci": 89.7,
+          "upper_ci": 275.5
+        },
+        {
+          "date": "2022-06",
+          "forecast": 187.3,
+          "lower_ci": 91.9,
+          "upper_ci": 282.8
+        },
+        {
+          "date": "2022-07",
+          "forecast": 181.5,
+          "lower_ci": 83.2,
+          "upper_ci": 279.8
+        },
+        {
+          "date": "2022-08",
+          "forecast": 187.8,
+          "lower_ci": 87.5,
+          "upper_ci": 288.1
+        }
+      ]
+    },
+    "movielens": {
+      "order": [
+        1,
+        1,
+        2
+      ],
+      "aic": 604.72,
+      "data_points": 224,
+      "date_range": [
+        "2000-01",
+        "2018-08"
+      ],
+      "holdout_evaluation": {
+        "holdout_months": 12,
+        "arima_rmse": 460.518,
+        "naive_rmse": 506.84,
+        "seasonal_naive_rmse": 757.812,
+        "improvement_over_naive_pct": 9.14
+      },
+      "diagnostics": {
+        "aic": 604.72,
+        "bic": 618.35,
+        "ljung_box_p_value": 0.996,
+        "residuals_white_noise": true
+      }
+    }
+  },
+  "recommender": {
+    "total_movies_indexed": 9742,
+    "cf_movies_indexed": 1297,
+    "evaluation": {
+      "content": {
+        "evaluated_users": 150,
+        "hits": 1,
+        "hit_rate_at_10": 0.0067,
+        "precision_at_10": 0.0007,
+        "recall_at_10": 0.0067
+      },
+      "cf": {
+        "evaluated_users": 150,
+        "hits": 7,
+        "hit_rate_at_10": 0.0467,
+        "precision_at_10": 0.0047,
+        "recall_at_10": 0.0467
+      },
+      "rules": {
+        "evaluated_users": 150,
+        "hits": 4,
+        "hit_rate_at_10": 0.0267,
+        "precision_at_10": 0.0027,
+        "recall_at_10": 0.0267
+      },
+      "hybrid": {
+        "evaluated_users": 150,
+        "hits": 7,
+        "hit_rate_at_10": 0.0467,
+        "precision_at_10": 0.0047,
+        "recall_at_10": 0.0467
+      }
+    }
+  }
+}
